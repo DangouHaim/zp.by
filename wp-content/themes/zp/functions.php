@@ -1,5 +1,5 @@
 <?
 
 function themePath () {
-	return "wp-content/themes/zp/";
+	return get_template_directory_uri() . "/";
 }
