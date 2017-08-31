@@ -12,6 +12,7 @@ Template Name: main-filter
 		<?php the_content(); ?>
 	<?php endwhile; ?>
 
+	<span class='filter-reset'>reset</span>
 	<?php
 	$args = array(
 		'taxonomy' => 't_slider',

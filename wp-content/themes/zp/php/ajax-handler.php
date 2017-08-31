@@ -29,13 +29,7 @@ function getByID()
             ));
     }
     else {
-        $args = array( 'posts_per_page' => 0, 'post_type'=> 'slider', 'tax_query' => array(
-            array(
-                'taxonomy' => 't_slider',
-                'field' => 'term_id',
-                'terms' => array(),
-                )
-            ));
+        $args = array( 'posts_per_page' => 0, 'post_type'=> 'slider');
     }
     $posts = get_posts( $args );
     $content = to_html_slide( $posts );
