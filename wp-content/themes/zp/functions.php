@@ -30,12 +30,10 @@ function load_data () {
 	wp_enqueue_script( 'jquery' );
 	wp_enqueue_script( "libs-script" );
 	wp_enqueue_script( "common-script" );
-}
 
-/*
-$handle = 'wpdocs';
-wp_register_style( $handle, get_stylesheet_directory_uri().'/relative/path/to/stylesheet.css', array(), '', true );
-if ( is_page_template( 'template-name.php' ) ) {
-    wp_enqueue_style( $handle );
+	/*
+	if ( is_page_template( 'template-name.php' ) ) {
+	    wp_enqueue_style( $handle );
+	}
+	*/
 }
-*/

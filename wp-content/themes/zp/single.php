@@ -1,182 +1,4 @@
-<?php get_header(); ?>
-
-<body class="isnohome">
-
-	<!-- Здесь пишем код -->
-
-	<header class="main-head">
-
-		<div class="mobile-mnu hidden-md hidden-lg">
-			<a href="#menu" class="toggle-mnu"><span></span></a> <b>Меню</b>
-		</div>
-
-		<nav class="top-line">
-
-			<div class="container">
-				<ul class="sf-menu">
-					<li><a href="index.html">Главная</a></li>
-					<li class="active">
-						<a href="#">Услуги и стоимость<i class="fa fa-caret-down" aria-hidden="true"></i></a>
-						<ul>
-							<li><a href="avtopomoshch.html">Автопомощь</a></li>
-							<li><a href="shinomontage.html">Шиномонтаж</a></li>
-							<li><a href="remont_motorov.html">Ремонт моторов</a></li>
-							<li><a href="remont_akpp.html">Ремонт АКПП</a></li>
-							<li><a href="avtopomoshch_na_doroge.html">Автопомощь на дороге</a></li>
-							<li><a href="vip_taxi.html">Вип такси</a></li>
-						</ul>
-					</li>
-					<li><a href="#news">Новости</a></li>
-					<li><a href="#links">Ещё сайты</a></li>
-					<li><a href="#footer">О компании</a></li>
-				</ul>
-			</div>
-
-		</nav>
-
-		<section class="top-panel">
-			
-			<div class="container">
-
-				<div class="top-panel-content">
-					
-					<div class="row">
-
-						<div class="col-md-2 col-sm-6 col-xs-4">
-							
-							<a href="#" class="logo"><img src="img/logo.png" alt="Эвокуатор"></a>
-
-						</div>
-						<div class="col-md-4">
-							
-							<div class="top-panel-box hidden-sm hidden-xs">
-								<h4>Адреса организации:</h4>
-								<ul>
-									<li><i class="fa fa-map-marker" aria-hidden="true"></i> Гомельский р-он, г/п Урицкое, ул. 50 лет Октября, д. 44</li>
-								</ul>
-							</div>
-
-						</div>
-						<div class="col-md-3">
-							
-							<div class="top-panel-box hidden-sm hidden-xs">
-								<h4>Время работы:</h4>
-								<ul>
-									<li><i class="fa fa-clock-o" aria-hidden="true"></i> Эвакуация круглосуточно</li>
-								</ul>
-							</div>
-
-						</div>
-						<div class="col-md-3 col-sm-6 col-xs-8">
-							
-							<div class="text-right">
-								<div class="top-phone"><span><i class="fa fa-phone" aria-hidden="true"></i> +375 29</span> 687-54-69 </div>
-								<div class="top-email hidden-sm hidden-xs"><span><i class="fa fa-envelope" aria-hidden="true"></i> E-Mail: </span><a href="mailto:nx100@yandex.ru">nx100@yandex.ru</a></div>
-								<div class="top-button">
-									<a href="#callback" class="button button-small popup-with-move-anim" data-form="Верхняя форма">Заказать звонок</a>
-								</div>
-							</div>
-							
-						</div>
-
-					</div>
-
-				</div>
-			
-			</div>
-
-		</section>
-
-		<section class="slider-wrap">
-			
-			<div class="container">
-				<div class="slider-nav-container">
-					<div class="slider-nav">
-						<div class="prev"><i class="fa fa-angle-left" aria-hidden="true"></i></div>
-						<div class="next"><i class="fa fa-angle-right" aria-hidden="true"></i></div>
-					</div>
-				</div>
-			</div>
-
-			<div class="slider">
-
-				<div class="slide">
-					<div class="slide-bg" style="background-image: url(img/slide-1.jpg);"></div>
-					<div class="slide-content">
-						<div class="container">
-							<div class="row">
-								<div class="col-md-10 col-sm-9 col-xs-offset-1">
-									<div class="row">
-										<div class="col-md-6">
-											<h2>Автопомощь Эвакуация 24 часа в сутки</h2>
-											<p> Эвакуация аварийных и неисправных автомобилей, массой до 3,5 тонн</p>
-											<a href="#" class="button">Список услуг</a>
-										</div>
-										<div class="col-md-6 hidden-sm hidden-xs">
-											<div class="slide-img-wrap">
-												<img src="img/slide-img-1.png" alt="Alt">
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="slide">
-					<div class="slide-bg" style="background-image: url(img/slide-2.jpg);"></div>
-					<div class="slide-content">
-						<div class="container">
-							<div class="row">
-								<div class="col-md-10 col-sm-9 col-xs-offset-1">
-									<div class="row">
-										<div class="col-md-6">
-											<h2>Первая автопомощь на дорогах Гомеля</h2>
-											<p>Мы оказываем услуги от 300 бр</p>
-											<a href="#" class="button">Список услуг</a>
-										</div>
-										<div class="col-md-6 hidden-sm hidden-xs">
-											<div class="slide-img-wrap">
-												<img src="img/slide-img-1.png" alt="Alt">
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="slide">
-					<div class="slide-bg" style="background-image: url(img/slide-3.jpg);"></div>
-					<div class="slide-content">
-						<div class="container">
-							<div class="row">
-								<div class="col-md-10 col-sm-9 col-xs-offset-1">
-									<div class="row">
-										<div class="col-md-6">
-											<h2>Любая форма расчета с покупателями</h2>
-											<p>Мы осуществляем наличный и безналичный расчёт с покупателями</p>
-											<a href="#" class="button">Список услуг</a>
-										</div>
-										<div class="col-md-6 hidden-sm hidden-xs">
-											<div class="slide-img-wrap">
-												<img src="img/slide-img-1.png" alt="Alt">
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-
-			</div>
-
-		</section>
-
-
+<?php get_header("single"); ?>
 
 		<div class="content">
 
@@ -185,9 +7,15 @@
 					<div class="col-md-9">
 						
 						<article>
-							<h1>Автопомощь</h1>
+							<h1><?php echo the_title(); ?></h1>
 							<p>
-								Эвакуация 24 часа аварийных и неисправных автомобилей: джипов, микроавтобусов, легковых авто, массой до 3,5 тонн. Работаем на территории РБ, РФ, Украина. Форма оплаты любая. Помощь в организации ремонта автомобилей.
+								<?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
+									<?php echo the_content(); ?>
+								<?php endwhile; ?>
+									
+								<?php else: ?>
+									
+								<?php endif; ?>
 							</p>
 						</article>
 
