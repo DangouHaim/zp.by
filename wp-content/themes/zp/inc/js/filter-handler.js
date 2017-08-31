@@ -1,21 +1,22 @@
 (function($){
 
 	function mainFilter() {
-		if ($('.cities-list').length > 0) {
-
-			function getByCity(resetQuery) {
+		if ($('.filter-result').length > 0) {
+			function getByID(resetQuery) {
 				if(resetQuery == "undefined") {
 					resetQuery = false;
 				}
-				var city = '';
-				city = $('#shop-filter .filter-text.active').data('value');
+				
+				var id = '';
+				id = $('.filter-item.active').data('value');
+
 				$.ajax({
 					type: "POST",
-					url: "/wp-admin/admin-ajax.php?action=getByCity",
-					data: {'city': city, 'reset' : resetQuery},
+					url: "/wp-admin/admin-ajax.php?action=getByID",
+					data: {'id': id, 'reset' : resetQuery},
 					success: function (data) {
 						if (data.status == 'success') {
-							$('.cities-list').html(data.content);
+							$('.filter-result').html(data.content);
 						} else {
 							alert('Произошла ошибка обработки запроса');
 						}
@@ -26,23 +27,19 @@
 				});
 			}
 
-			getByCity(true);
+			getByID(true);
 
-			$(document).on('click', '.vacancies-item .title', function () {
-				$(this).toggleClass('active');
-				$(this).siblings('.vacansies-content').slideToggle();
-			})
-			$('#shop-filter').find('.filter-text').click(function () {
+			$('.filter-item').click(function () {
 				if ($(this).is('.active')) {
 					return false;
 				}
-				$(this).closest('ul').find('.active').removeClass('active');
+				$(this).closest('div').find('.active').removeClass('active');
 				$(this).addClass('active');
-				getByCity();
+				getByID();
 				return false;
 			})
-			$('#shop-filter').find('.filter-reset').click(function () {
-				getByCity(true);
+			$('.filter-reset').click(function () {
+				getByID(true);
 			})
 		}
 	}
@@ -52,7 +49,7 @@
 	});
 
 	$(window).load(function(){
-		
+
 	});
 
 	$(document).on("scroll", function(){

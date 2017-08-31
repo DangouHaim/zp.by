@@ -5,57 +5,30 @@ Template Name: main-filter
 ?>
 <?php get_header(); ?>
 
-<div id="main-info" class="otherpage">
-	<div class="container-fluid">
-		<?php the_breadcrumb() ?>
-
-		<div class="row">
-			<div class="content col-md-12">
-				<?php while (have_posts()) : the_post(); ?>
-					<?php the_content(); ?>
-				<?php endwhile; ?>
-			</div>
-		</div>
-		
-		
 
 
-		<?php
-		$args = array(
-			'taxonomy' => 'filter_cities',
-			'hide_empty' => true,
-			'parent' => get_term_by('slug', 'city_mark', 'filter_cities')->term_id
-			);
-		$cities = get_terms($args);
-		$activeCity = false;
-		$activeCityClass = '';
-		foreach ($cities as $city) {
-			if (empty($activeCity) && $city->name == "Минск") {
-				$activeCityClass = 'active';
-				$activeCity = true;
-			} else {
-				$activeCityClass = '';
-			}
-			echo "
+<div class="content">
+	<?php while (have_posts()) : the_post(); ?>
+		<?php the_content(); ?>
+	<?php endwhile; ?>
 
-			<li>
-				<label>
-					<input type='radio'>
-					<span class=\"filter-text {$activeCityClass}\" data-value=\"{$city->term_id}\" >
-						{$city->name}
-					</span>
-				</label>
-			</li>";
-		}
-		?>
+	<?php
+	$args = array(
+		'taxonomy' => 't_slider',
+		'hide_empty' => true,
+		'parent' => get_term_by('slug', 'slider', 't_slider')->term_id
+		);
+	$slides = get_terms($args);
+	$activeClass = "active";
+	foreach ($slides as $slide) {
+		echo "<p class='filter-item {$activeClass}' data-value='{$slide->term_id}'>{$slide->name}</p>";
+		$activeClass = "";
+	}
+	?>
 
-
-		
-		<tbody class="cities-list"></tbody>
-
-
-
-	</div>
+	<div class="filter-result"></div>
 </div>
-</div>
+
+
+
 <?php get_footer(); ?>

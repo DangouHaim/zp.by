@@ -1,5 +1,5 @@
 <?
-function CityHtml($posts){
+function to_html_slide($posts){
     $content = '';
     foreach($posts as $post){
         $content .= $post->post_content;
@@ -7,37 +7,37 @@ function CityHtml($posts){
     return $content;
 }
 
-add_action('wp_ajax_getByCity', 'getByCity');
-add_action('wp_ajax_nopriv_getByCity', 'getByCity');
+add_action('wp_ajax_getByID', 'getByID');
+add_action('wp_ajax_nopriv_getByID', 'getByID');
 
 
-function getByCity()
+function getByID()
 {
     $reset = $_POST['reset'];
     if(!$reset) {
-        $city = $_POST['city'];
-        if(empty($city)){
+        $id = $_POST['id'];
+        if(empty($id)){
             wp_send_json(array('status' => 'error'));
         }
-        $args = array( 'posts_per_page' => 0, 'post_type'=> 'city_mark', 'tax_query' => array(
+        $args = array( 'posts_per_page' => 0, 'post_type'=> 'slider', 'tax_query' => array(
             array(
-                'taxonomy' => 'filter_cities',
+                'operator' => 'AND',
+                'taxonomy' => 't_slider',
                 'field' => 'term_id',
-                'terms' => array($city),
+                'terms' => array($id),
                 )
             ));
     }
     else {
-        $args = array( 'posts_per_page' => 0, 'post_type'=> 'city_mark', 'tax_query' => array(
+        $args = array( 'posts_per_page' => 0, 'post_type'=> 'slider', 'tax_query' => array(
             array(
-                'operator' => 'AND',
-                'taxonomy' => 'filter_cities',
+                'taxonomy' => 't_slider',
                 'field' => 'term_id',
                 'terms' => array(),
                 )
             ));
     }
     $posts = get_posts( $args );
-    $content = CityHtml( $posts );
+    $content = to_html_slide( $posts );
     die(wp_send_json(array('status' => 'success','content' => $content)));
 }
