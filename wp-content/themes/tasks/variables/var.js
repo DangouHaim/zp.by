@@ -1,8 +1,10 @@
+var rootDirectory = "zp/";
+var host = "zp.by";
 var res = {
-	themePath: ["./zp/"],
-	fullPath: ["/wp-content/themes/zp/"],
-	siteName: ["zp.by"],
-	siteProxy: ["zp.by:8000"]
+	themePath: ["./" + rootDirectory],
+	fullPath: ["/wp-content/themes/" + rootDirectory],
+	siteName: [host],
+	siteProxy: [host + ":8000"]
 };
 
 module.exports = res;
