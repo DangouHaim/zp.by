@@ -14,12 +14,12 @@ function requireTask(taskName, path, options) {
 }
 
 requireTask("prepareSass", "./tasks/buildPrepare", {
-    src: [themePath + "inc/sass/_*.sass", themePath + "inc/sass/*.sass", "!" + themePath + "inc/sass/header.sass"],
+    src: [themePath + "inc/sass/_build.sass"],
     ext: "sass"
 });
 
 requireTask("prepareScss", "./tasks/buildPrepare", {
-    src: [themePath + "inc/sass/_*.scss", themePath + "inc/sass/*.scss", "!" + themePath + "inc/sass/header.scss"],
+    src: [themePath + "inc/sass/_build.scss"],
     ext: "scss"
 });
 
@@ -29,7 +29,7 @@ requireTask("styles", "./tasks/styles", {
 });
 
 requireTask("prepareHeader", "./tasks/styles", {
-    src: [themePath + "inc/sass/header.sass"],
+    src: [themePath + "inc/sass/header.sass", themePath + "inc/sass/header.scss"],
     target: "header.css"
 });
 
