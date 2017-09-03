@@ -17,9 +17,7 @@
 			mainSass: themePath + 'inc/css/main.css',
 			headerSass: themePath + 'inc/css/header.css',
 			spriteSass: themePath + 'inc/css/sprite.css',
-			headerCss: themePath + 'css/header.min.css',
-			mainCss: themePath + 'css/main.min.css',
-			fontsCss: themePath + 'css/fonts.min.css'
+			headerCss: themePath + 'css/header.min.css'
 		},
         /**
          * Динамическая загрузка скрипта
@@ -108,8 +106,6 @@
             sourceLoader.loadStyle("spriteSass", true);
 
             sourceLoader.loadStyle("headerCss", true);
-            sourceLoader.loadStyle("mainCss", true);
-            sourceLoader.loadStyle("fontsCss", true);
 
             sourceLoader.loadScript("main", function(){});
             sourceLoader.loadScript("filterHandler", function(){});
