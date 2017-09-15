@@ -8,7 +8,8 @@
 				}
 				
 				var id = '';
-				id = $('.filter-item.active').data('value');
+				//id = $('.filter-item.active').data('value');
+				id = $("select[name=main-filter]").val();
 
 				$.ajax({
 					type: "POST",
@@ -29,6 +30,7 @@
 
 			getByID(true);
 
+			/*
 			$('.filter-item').click(function () {
 				if ($(this).is('.active')) {
 					return false;
@@ -38,6 +40,12 @@
 				getByID();
 				return false;
 			})
+			*/
+
+			$(".main-filter").on("change", function () {
+				getByID();
+			});
+
 			$('.filter-reset').click(function () {
 				getByID(true);
 			})

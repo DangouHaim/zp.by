@@ -34,4 +34,19 @@ function init_taxanomy () {
 			'show_in_nav_menus' => true
 			)
 		);
+
+	register_taxonomy(
+		't_post',
+		'post',
+		array(
+			'labels' => array(
+				'name' => 'Type',
+				),
+			'show_ui' => true,
+			'show_tagcloud' => false,
+			'hierarchical' => true,
+			'query_var' => true,
+			'show_in_nav_menus' => true
+			)
+		);
 }

@@ -78,12 +78,11 @@ $(function() {
 	};
 
 	//E-mail Ajax Send
-	//Documentation & Example: https://github.com/agragregra/uniMail
-	$("form").submit(function() { //Change
+	$("form").submit(function() {
 		var th = $(this);
 		$.ajax({
 			type: "POST",
-			url: "/mail.php", //Change
+			url: "/mail.php",
 			data: th.serialize()
 		}).done(function() {
 			$(".success").addClass("visible");

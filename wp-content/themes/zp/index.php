@@ -65,7 +65,27 @@
 		</div>
 
 	</div>
+</section>
 
+<section class="main-filter-wp">
+	<div class="content">
+		<span class='filter-reset'>reset</span>
+		<?php
+		$args = array(
+			'taxonomy' => 't_post',
+			'hide_empty' => true,
+			'parent' => get_term_by('slug', 'post', 't_post')->term_id
+			);
+		$slides = get_terms($args);
+		$activeClass = "active";
+		echo "<select class='main-filter' name='main-filter'>";
+		foreach ($slides as $slide) {
+			echo "<option class='filter-item {$activeClass}' value='{$slide->term_id}'>{$slide->name}</option>";
+			$activeClass = "";
+		}
+		echo "</select>";
+		?>
+	</div>
 </section>
 
 <section class="sect-services">
@@ -74,39 +94,10 @@
 
 		<div class="row">
 
+			<div class="filter-result"></div>
 
-
-			<?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
-				<div class="col-md-3 col-sm-6">
-					<div class="service-item">
-						<a href="<?php echo the_permalink(); ?>" class="service-item-image" style="background-image: url(<?php echo the_post_thumbnail_url(); ?>);">
-							<i class="fa fa-eye" aria-hidden="true"></i>
-						</a>
-						<h4><?php echo the_title(); ?></h4>
-						<div class="service-item-stars">
-							<i class="fa fa-star" aria-hidden="true"></i>
-							<i class="fa fa-star" aria-hidden="true"></i>
-							<i class="fa fa-star" aria-hidden="true"></i>
-						</div>
-						<div class="service-item-price">
-							<i class="fa fa-tags" aria-hidden="true"></i> от <span><?php echo get_the_excerpt(); ?></span> бр
-						</div>
-						<a href="<?php echo the_permalink(); ?>" class="button">Подробнее</a>
-					</div>
-
-				</div>
-			<?php endwhile; ?>
-
-		<?php else: ?>
-			<h2>Нет записей.</h2>
-		<?php endif; ?>
-
-
-
-
+		</div>
 	</div>
-
-</div>
 
 </section>
 
