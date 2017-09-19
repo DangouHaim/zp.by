@@ -76,15 +76,19 @@
 			'hide_empty' => true,
 			'parent' => get_term_by('slug', 'post', 't_post')->term_id
 			);
+		get_term_by( $field, $value, $taxonomy, $output, $filter );
 		$slides = get_terms($args);
 		$activeClass = "active";
-		echo "<select class='main-filter' name='main-filter'>";
+
+		echo "<select class='main-filter master' name='main-filter'>";
 		foreach ($slides as $slide) {
 			echo "<option class='filter-item {$activeClass}' value='{$slide->term_id}'>{$slide->name}</option>";
 			$activeClass = "";
 		}
 		echo "</select>";
+
 		?>
+		<div class="additional-filters"></div>
 	</div>
 </section>
 

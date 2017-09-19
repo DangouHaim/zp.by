@@ -29,7 +29,6 @@ function to_html_post($posts){
 add_action('wp_ajax_getByID', 'getByID');
 add_action('wp_ajax_nopriv_getByID', 'getByID');
 
-
 function getByID()
 {
     $reset = $_POST['reset'];
@@ -40,7 +39,7 @@ function getByID()
         }
         $args = array( 'posts_per_page' => 0, 'post_type'=> 'post', 'tax_query' => array(
             array(
-                'operator' => 'AND',
+
                 'taxonomy' => 't_post',
                 'field' => 'term_id',
                 'terms' => array($id),
@@ -52,5 +51,54 @@ function getByID()
     }
     $posts = get_posts( $args );
     $content = to_html_post( $posts );
+    die(wp_send_json(array('status' => 'success','content' => $content)));
+}
+
+
+
+
+
+
+
+function to_html_filter_args($id){
+    $content = '';
+
+    if(count($id) > 0) {
+        $activeClass = "active";
+
+        $arg = array(
+            'taxonomy' => 't_post',
+            'hide_empty' => true,
+            'parent' => $id
+            );
+        $data = get_terms($arg);
+
+        if(count($data) > 0) {
+            $content .=  "<select class='main-filter' onchange='changeHandler();'>";
+            $content .=  "<option class='filter-item active' value=''>Нет</option>";
+            foreach ($data as $d) {
+                $content .=  "<option class='filter-item {$activeClass}' value='{$d->term_id}'>{$d->name}</option>";
+            }
+            $content .=  "</select>";
+        }
+
+    }
+
+
+    return $content;
+}
+
+add_action('wp_ajax_getMoreFilterArgs', 'getMoreFilterArgs');
+add_action('wp_ajax_nopriv_getMoreFilterArgs', 'getMoreFilterArgs');
+
+function getMoreFilterArgs()
+{
+    $id = $_POST['id'];
+    if(empty($id)){
+        wp_send_json(array('status' => 'error'));
+    }
+
+    $content = to_html_filter_args($id);
+
     die(wp_send_json(array('status' => 'success','content' => $content)));
 }

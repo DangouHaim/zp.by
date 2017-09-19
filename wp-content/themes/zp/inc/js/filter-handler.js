@@ -2,14 +2,13 @@
 
 	function mainFilter() {
 		if ($('.filter-result').length > 0) {
-			function getByID(resetQuery) {
+			function getByID(tid, resetQuery) {
 				if(resetQuery == "undefined") {
 					resetQuery = false;
 				}
 				
-				var id = '';
+				var id = tid;
 				//id = $('.filter-item.active').data('value');
-				id = $("select[name=main-filter]").val();
 
 				$.ajax({
 					type: "POST",
@@ -28,27 +27,52 @@
 				});
 			}
 
-			getByID(true);
 
-			/*
-			$('.filter-item').click(function () {
-				if ($(this).is('.active')) {
-					return false;
-				}
-				$(this).closest('div').find('.active').removeClass('active');
-				$(this).addClass('active');
-				getByID();
-				return false;
-			})
-			*/
+			function getMoreFilterArgs(tid) {
+				var id = tid;
 
-			$(".main-filter").on("change", function () {
-				getByID();
+				$.ajax({
+					type: "POST",
+					url: "/wp-admin/admin-ajax.php?action=getMoreFilterArgs",
+					data: {'id': id},
+					success: function (data) {
+						if (data.status == 'success') {
+							if(data.content.length > 0) {
+								$('.main-filter-wp .content .additional-filters').html("");
+								$('.main-filter-wp .content .additional-filters').append(data.content);
+							}
+						} else {
+							alert('Произошла ошибка обработки запроса');
+						}
+					},
+					error: function () {
+						alert('Произошла ошибка соединения');
+					},
+				});
+			}
+
+			function setFilterOnChange() {
+				$(".main-filter").on("change", function () {
+					getByID($(this).val());
+					getMoreFilterArgs($(this).val());
+				});
+			}
+
+			getByID(-1, true);
+			setFilterOnChange();
+
+			$('.main-filter-wp .content .additional-filters').bind("DOMSubtreeModified",function(){
+				setFilterOnChange();
 			});
 
 			$('.filter-reset').click(function () {
-				getByID(true);
-			})
+				$('.main-filter-wp .content .additional-filters').html("");
+				getByID(-1, true);
+			});
+
+			$(".main-filter.master").on("change", function() {
+				$('.main-filter-wp .content .additional-filters').html("");
+			});
 		}
 	}
 
