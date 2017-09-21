@@ -69,7 +69,7 @@
 
 <section class="main-filter-wp">
 	<div class="content">
-		<span class='filter-reset'>reset</span>
+		<span class='filter-reset'>Сбросить</span>
 		<?php
 		$args = array(
 			'taxonomy' => 't_post',
@@ -78,12 +78,12 @@
 			);
 		get_term_by( $field, $value, $taxonomy, $output, $filter );
 		$slides = get_terms($args);
-		$activeClass = "active";
 
+		echo "<div class='filter-title'>Фильтр</div>";
 		echo "<select class='main-filter master' name='main-filter'>";
+		echo "<option value='' default selected disabled hidden>Выбрать</option>";
 		foreach ($slides as $slide) {
-			echo "<option class='filter-item {$activeClass}' value='{$slide->term_id}'>{$slide->name}</option>";
-			$activeClass = "";
+			echo "<option class='filter-item' value='{$slide->term_id}'>{$slide->name}</option>";
 		}
 		echo "</select>";
 

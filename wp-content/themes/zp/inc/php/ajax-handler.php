@@ -37,7 +37,7 @@ function getByID()
         if(empty($id)){
             wp_send_json(array('status' => 'error'));
         }
-        $args = array( 'posts_per_page' => 0, 'post_type'=> 'post', 'tax_query' => array(
+        $args = array( 'posts_per_page' => -1, 'post_type'=> 'post', 'tax_query' => array(
             array(
 
                 'taxonomy' => 't_post',
@@ -47,7 +47,7 @@ function getByID()
             ));
     }
     else {
-        $args = array( 'posts_per_page' => 0, 'post_type'=> 'post');
+        $args = array( 'posts_per_page' => -1, 'post_type'=> 'post');
     }
     $posts = get_posts( $args );
     $content = to_html_post( $posts );
@@ -60,11 +60,10 @@ function getByID()
 
 
 
-function to_html_filter_args($id){
+function to_html_filter_args($id, $title){
     $content = '';
 
     if(count($id) > 0) {
-        $activeClass = "active";
 
         $arg = array(
             'taxonomy' => 't_post',
@@ -74,10 +73,11 @@ function to_html_filter_args($id){
         $data = get_terms($arg);
 
         if(count($data) > 0) {
-            $content .=  "<select class='main-filter' onchange='changeHandler();'>";
-            $content .=  "<option class='filter-item active' value=''>Нет</option>";
+            $content .= "<div class='filter-title'>{$title}</div>";
+            $content .= "<select class='main-filter' onchange='changeHandler();'>";
+            $content .= "<option value='' selected disabled hidden>Выбрать</option>";
             foreach ($data as $d) {
-                $content .=  "<option class='filter-item {$activeClass}' value='{$d->term_id}'>{$d->name}</option>";
+                $content .= "<option class='filter-item' value='{$d->term_id}'>{$d->name}</option>";
             }
             $content .=  "</select>";
         }
@@ -94,11 +94,17 @@ add_action('wp_ajax_nopriv_getMoreFilterArgs', 'getMoreFilterArgs');
 function getMoreFilterArgs()
 {
     $id = $_POST['id'];
+    $title = $_POST['title'];
+
     if(empty($id)){
         wp_send_json(array('status' => 'error'));
     }
 
-    $content = to_html_filter_args($id);
+    if(empty($title)){
+        wp_send_json(array('status' => 'error'));
+    }
+
+    $content = to_html_filter_args($id, $title);
 
     die(wp_send_json(array('status' => 'success','content' => $content)));
 }

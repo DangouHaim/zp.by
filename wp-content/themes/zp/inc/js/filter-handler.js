@@ -28,13 +28,13 @@
 			}
 
 
-			function getMoreFilterArgs(tid) {
+			function getMoreFilterArgs(tid, title) {
 				var id = tid;
 
 				$.ajax({
 					type: "POST",
 					url: "/wp-admin/admin-ajax.php?action=getMoreFilterArgs",
-					data: {'id': id},
+					data: {'id': id, 'title': title},
 					success: function (data) {
 						if (data.status == 'success') {
 							if(data.content.length > 0) {
@@ -54,7 +54,7 @@
 			function setFilterOnChange() {
 				$(".main-filter").on("change", function () {
 					getByID($(this).val());
-					getMoreFilterArgs($(this).val());
+					getMoreFilterArgs($(this).val(), $(this).find("option:selected").text());
 				});
 			}
 
@@ -66,6 +66,9 @@
 			});
 
 			$('.filter-reset').click(function () {
+				$('.main-filter option').prop('selected', function() {
+					return this.defaultSelected;
+				});
 				$('.main-filter-wp .content .additional-filters').html("");
 				getByID(-1, true);
 			});
