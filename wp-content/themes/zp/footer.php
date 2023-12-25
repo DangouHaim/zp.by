@@ -7,15 +7,15 @@
 					<div class="col-md-2 col-sm-6">
 						
 						<a href="#" class="logo"><img src="<?php echo themePath(); ?>/img/logo.png" alt="Эвокуатор"></a>
-						<p class="footer-about">Автопомощь. Эвакуация 24 часа аварийных и неисправных автомобилей: джипов, микроавтобусов, легковых авто. Работаем на территории РБ, РФ, Украина. Форма оплаты любая. Помощь в организации ремонта автомобилей.</p>
+						<p class="footer-about"><?php echo get_bloginfo('description') ?></p>
 
 					</div>
 
 					<div class="col-md-3 col-md-push-7 col-sm-6">
 						
 						<div class="text-right">
-							<div class="top-phone"><span><i class="fa fa-phone" aria-hidden="true"></i> +375 29</span> 687-54-69 </div>
-							<div class="top-email"><span><i class="fa fa-envelope" aria-hidden="true"></i> E-Mail: </span><a href="mailto:nx100@yandex.ru">nx100@yandex.ru</a></div>
+							<div class="top-phone"><span><i class="fa fa-phone" aria-hidden="true"></i> <?php echo $_SESSION['blog_meta']['phone_code']; ?></span> <?php echo $_SESSION['blog_meta']['phone']; ?> </div>
+							<div class="top-email"><span><i class="fa fa-envelope" aria-hidden="true"></i> E-Mail: </span><a href="mailto:<?php echo get_option('admin_email') ?>"><?php echo get_option('admin_email') ?></a></div>
 							<div class="top-button">
 								<a href="#callback" class="button button-small popup-with-move-anim" data-form="Нижняя форма">Заказать звонок</a>
 							</div>
@@ -39,14 +39,14 @@
 								<div class="top-panel-box">
 									<h4>Адреса организации:</h4>
 									<ul>
-										<li><i class="fa fa-map-marker" aria-hidden="true"></i> Гомельский р-он, г/п Урицкое, ул. 50 лет Октября, д. 44</li>
+										<li><i class="fa fa-map-marker" aria-hidden="true"></i> <?php echo $_SESSION['blog_meta']['address']; ?></li>
 									</ul>
 								</div>
 
 								<div class="top-panel-box">
 									<h4>Время работы:</h4>
 									<ul>
-										<li><i class="fa fa-clock-o" aria-hidden="true"></i> Эвакуация круглосуточно</li>
+										<li><i class="fa fa-clock-o" aria-hidden="true"></i> <?php echo $_SESSION['blog_meta']['work_time']; ?></li>
 									</ul>
 								</div>
 
@@ -56,14 +56,34 @@
 
 								<div class="top-panel-box">
 									<h4>Услуги компании:</h4>
-									<ul class="menu-type-2">
-										<li><a href="avtopomoshch.html"><span class="fa fa-check"></span>Автопомощь</a></li>
-										<li><a href="shinomontage.html"><span class="fa fa-check"></span>Шиномонтаж</a></li>
-										<li><a href="remont_motorov.html"><span class="fa fa-check"></span>Ремонт моторов</a></li>
-										<li><a href="remont_akpp.html"><span class="fa fa-check"></span>Ремонт АКПП</a></li>
-										<li><a href="avtopomoshch_na_doroge.html"><span class="fa fa-check"></span>Автопомощь на дороге</a></li>
-										<li><a href="vip_taxi.html"><span class="fa fa-check"></span>Вип такси</a></li>
-									</ul>
+
+									<?php
+										$args = array(
+											'sort_order' => 'asc',
+											'sort_column' => 'post_title',
+											'hierarchical' => 0,
+											'parent' => 0,
+											'post_type' => 'page',
+											'post_status' => 'publish',
+											'meta_key' => 'type',
+											'meta_value' => 'service',
+										);
+			
+										$all_pages = get_pages($args);
+
+										if ($all_pages) :
+											echo '<ul class="menu-type-2">';
+											foreach ($all_pages as $page) :
+										?>
+											<li><a href="<?php echo esc_url(get_permalink($page->ID)); ?>"><span class="fa fa-check"></span><?php echo esc_html($page->post_title); ?></a></li>
+										<?php
+											endforeach;
+											echo '</ul>';
+										else :
+											echo '<p>No pages found.</p>';
+										endif;
+									?>
+
 								</div>
 								
 							</div>
@@ -87,9 +107,9 @@
 			<div class="success">Спасибо за заявку!<br>
 			Мы свяжемся с вами.</div>
 
-			<input type="hidden" name="project_name" value="Эвакуатор">
-			<input type="hidden" name="admin_email" value="nx100@yandex.ru">
-			<input type="hidden" name="form_subject" value="Заявка с сайта эвакуатор">
+			<input type="hidden" name="project_name" value="Всё в дом">
+			<input type="hidden" name="admin_email" value="<?php echo get_option('admin_email') ?>">
+			<input type="hidden" name="form_subject" value="Заявка с сайта">
 			
 
 			<h3>Заказать звонок</h3>

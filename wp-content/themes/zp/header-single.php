@@ -1,3 +1,4 @@
+<?php  session_start(); ?>
 <!DOCTYPE html>
 <html class="no-js" lang="ru">
 
@@ -5,8 +6,8 @@
 
 	<meta charset="utf-8">
 
-	<title>Эвакуатор в Гомеле</title>
-	<meta name="description" content="Эвакуация в Гомеле 24 часа в сутки.">
+	<title><?php echo get_bloginfo('name'); ?></title>
+	<meta name="description" content="<?php echo get_bloginfo('description') ?>">
 
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -38,17 +39,35 @@
 
 			<div class="container">
 				<ul class="sf-menu">
-					<li><a href="index.html">Главная</a></li>
+					<li class="active"><a href="<?php echo esc_url(home_url('/')) ?>">Главная</a></li>
 					<li class="active">
 						<a href="#">Услуги и стоимость<i class="fa fa-caret-down" aria-hidden="true"></i></a>
-						<ul>
-							<li><a href="avtopomoshch.html">Автопомощь</a></li>
-							<li><a href="shinomontage.html">Шиномонтаж</a></li>
-							<li><a href="remont_motorov.html">Ремонт моторов</a></li>
-							<li><a href="remont_akpp.html">Ремонт АКПП</a></li>
-							<li><a href="avtopomoshch_na_doroge.html">Автопомощь на дороге</a></li>
-							<li><a href="vip_taxi.html">Вип такси</a></li>
-						</ul>
+						<?php
+							$args = array(
+								'sort_order' => 'asc',
+								'sort_column' => 'post_title',
+								'hierarchical' => 0,
+								'parent' => 0,
+								'post_type' => 'page',
+								'post_status' => 'publish',
+								'meta_key' => 'type',
+								'meta_value' => 'service',
+							);
+
+							$all_pages = get_pages($args);
+
+							if ($all_pages) :
+								echo '<ul>';
+								foreach ($all_pages as $page) :
+							?>
+								<li><a href="<?php echo esc_url(get_permalink($page->ID)); ?>"><?php echo esc_html($page->post_title); ?></a></li>
+							<?php
+								endforeach;
+								echo '</ul>';
+							else :
+								echo '<p>No pages found.</p>';
+							endif;
+						?>
 					</li>
 					<li><a href="#news">Новости</a></li>
 					<li><a href="#links">Ещё сайты</a></li>
@@ -68,7 +87,7 @@
 
 						<div class="col-md-2 col-sm-6 col-xs-4">
 							
-							<a href="#" class="logo"><img src="<?php echo themePath(); ?>/img/logo.png" alt="Эвокуатор"></a>
+							<a href="#" class="logo"><img height="100px" src="<?php echo themePath(); ?>/img/logo.png" alt="Logo"></a>
 
 						</div>
 						<div class="col-md-4">
@@ -76,7 +95,7 @@
 							<div class="top-panel-box hidden-sm hidden-xs">
 								<h4>Адреса организации:</h4>
 								<ul>
-									<li><i class="fa fa-map-marker" aria-hidden="true"></i> Гомельский р-он, г/п Урицкое, ул. 50 лет Октября, д. 44</li>
+									<li><i class="fa fa-map-marker" aria-hidden="true"></i> <?php echo $_SESSION['blog_meta']['address']; ?></li>
 								</ul>
 							</div>
 
@@ -86,7 +105,7 @@
 							<div class="top-panel-box hidden-sm hidden-xs">
 								<h4>Время работы:</h4>
 								<ul>
-									<li><i class="fa fa-clock-o" aria-hidden="true"></i> Эвакуация круглосуточно</li>
+									<li><i class="fa fa-clock-o" aria-hidden="true"></i> <?php echo $_SESSION['blog_meta']['work_time']; ?></li>
 								</ul>
 							</div>
 
@@ -94,8 +113,8 @@
 						<div class="col-md-3 col-sm-6 col-xs-8">
 							
 							<div class="text-right">
-								<div class="top-phone"><span><i class="fa fa-phone" aria-hidden="true"></i> +375 29</span> 687-54-69 </div>
-								<div class="top-email hidden-sm hidden-xs"><span><i class="fa fa-envelope" aria-hidden="true"></i> E-Mail: </span><a href="mailto:nx100@yandex.ru">nx100@yandex.ru</a></div>
+								<div class="top-phone"><span><i class="fa fa-phone" aria-hidden="true"></i> <?php echo $_SESSION['blog_meta']['phone_code']; ?></span> <?php echo $_SESSION['blog_meta']['phone']; ?> </div>
+								<div class="top-email hidden-sm hidden-xs"><span><i class="fa fa-envelope" aria-hidden="true"></i> E-Mail: </span><a href="mailto:<?php echo get_option('admin_email') ?>"><?php echo get_option('admin_email') ?></a></div>
 								<div class="top-button">
 									<a href="#callback" class="button button-small popup-with-move-anim" data-form="Верхняя форма">Заказать звонок</a>
 								</div>
@@ -124,69 +143,49 @@
 
 			<div class="slider">
 
-				<div class="slide">
-					<div class="slide-bg" style="background-image: url(img/slide-1.jpg);"></div>
-					<div class="slide-content">
-						<div class="container">
-							<div class="row">
-								<div class="col-md-10 col-sm-9 col-xs-offset-1">
-									<div class="row">
-										<div class="col-md-6">
-											<h2>Автопомощь Эвакуация 24 часа в сутки</h2>
-											<p> Эвакуация аварийных и неисправных автомобилей, массой до 3,5 тонн</p>
-											<a href="#" class="button">Список услуг</a>
-										</div>
-										<div class="col-md-6 hidden-sm hidden-xs">
-											<div class="slide-img-wrap">
-												<img src="img/slide-img-1.png" alt="Alt">
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
+				<?php
+					$args = array(
+						'sort_order' => 'asc',
+						'sort_column' => 'post_title',
+						'hierarchical' => 0,
+						'parent' => 0,
+						'post_type' => 'page',
+						'post_status' => 'publish',
+						'meta_key' => 'type',
+						'meta_value' => 'service',
+						'number' => 1,
+					);
 
-				<div class="slide">
-					<div class="slide-bg" style="background-image: url(img/slide-2.jpg);"></div>
-					<div class="slide-content">
-						<div class="container">
-							<div class="row">
-								<div class="col-md-10 col-sm-9 col-xs-offset-1">
-									<div class="row">
-										<div class="col-md-6">
-											<h2>Первая автопомощь на дорогах Гомеля</h2>
-											<p>Мы оказываем услуги от 300 бр</p>
-											<a href="#" class="button">Список услуг</a>
-										</div>
-										<div class="col-md-6 hidden-sm hidden-xs">
-											<div class="slide-img-wrap">
-												<img src="img/slide-img-1.png" alt="Alt">
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
+					$first_page = get_pages($args);
 
-				<div class="slide">
-					<div class="slide-bg" style="background-image: url(img/slide-3.jpg);"></div>
-					<div class="slide-content">
-						<div class="container">
-							<div class="row">
-								<div class="col-md-10 col-sm-9 col-xs-offset-1">
-									<div class="row">
-										<div class="col-md-6">
-											<h2>Любая форма расчета с покупателями</h2>
-											<p>Мы осуществляем наличный и безналичный расчёт с покупателями</p>
-											<a href="#" class="button">Список услуг</a>
-										</div>
-										<div class="col-md-6 hidden-sm hidden-xs">
-											<div class="slide-img-wrap">
-												<img src="img/slide-img-1.png" alt="Alt">
+					// Query the slides
+					$slider_query = new WP_Query(array(
+						'post_type' => 'slider', // Change to the name of your custom post type
+						'posts_per_page' => -1,   // Retrieve all slides
+					));
+
+					// Check if there are slides
+					if ($slider_query->have_posts()) :
+						while ($slider_query->have_posts()) : $slider_query->the_post();
+				?>
+					<div class="slide">
+						<div class="slide-bg" style="background-image: url(<?php echo get_post_meta(get_the_ID(), 'bg', true); ?>);"></div>
+						<div class="slide-content">
+							<div class="container">
+								<div class="row">
+									<div class="col-md-10 col-sm-9 col-xs-offset-1">
+										<div class="row">
+											<div class="col-md-6">
+												<h2><?php the_title(); ?></h2>
+												<p> <?php the_content(); ?></p>
+												<?php if ($first_page) : ?>
+													<a href="<?php echo esc_url(get_permalink($first_page[0]->ID)); ?>" class="button">Список услуг</a>
+												<?php endif; ?>
+											</div>
+											<div class="col-md-6 hidden-sm hidden-xs">
+												<div class="slide-img-wrap">
+													<img src="<?php echo get_the_post_thumbnail_url(); ?>" alt="Alt">
+												</div>
 											</div>
 										</div>
 									</div>
@@ -194,7 +193,13 @@
 							</div>
 						</div>
 					</div>
-				</div>
+				<?php
+					endwhile;
+						wp_reset_postdata();
+					else :
+						echo '<p>No slides found.</p>';
+					endif;
+				?>
 
 			</div>
 

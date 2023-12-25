@@ -1,3 +1,8 @@
+<?php
+/*
+Template Name: Custom Single Page
+*/
+?>
 <?php get_header("single"); ?>
 
 		<div class="content">
@@ -24,20 +29,10 @@
 						
 					<aside class="main-aside">
 						
-						<div class="service-item">
+						<div class="service-item" style="padding: 0;">
 							<div class="service-item-image" style="background-image: url(<?php echo get_the_post_thumbnail_url(); ?>);">
 								<i class="fa fa-eye" aria-hidden="true"></i>
 							</div>
-							<h4><?php echo the_title(); ?></h4>
-							<div class="service-item-stars">
-								<i class="fa fa-star" aria-hidden="true"></i>
-								<i class="fa fa-star" aria-hidden="true"></i>
-								<i class="fa fa-star" aria-hidden="true"></i>
-							</div>
-							<div class="service-item-price">
-								<i class="fa fa-tags" aria-hidden="true"></i> от <span>300 000</span> бр
-							</div>
-							<a href="#callback" class="button popup-with-move-anim">Заказать</a>
 						</div>
 
 						<div class="top-panel-box">
@@ -57,8 +52,9 @@
 								if ($all_pages) :
 									echo '<ul class="menu-type-2">';
 									foreach ($all_pages as $page) :
+										$active_class = is_page($page->ID) ? 'active' : '';
 								?>
-									<li><a href="<?php echo esc_url(get_permalink($page->ID)); ?>"><span class="fa fa-check"></span><?php echo esc_html($page->post_title); ?></a></li>
+									<li class="<?php echo esc_attr($active_class); ?>"><a href="<?php echo esc_url(get_permalink($page->ID)); ?>"><span class="fa fa-check"></span><?php echo esc_html($page->post_title); ?></a></li>
 								<?php
 									endforeach;
 									echo '</ul>';
@@ -90,7 +86,7 @@
 						</div>
 
 					</div>
-						
+
 						<?php
 							$args = array(
 								'sort_order' => 'desc',
