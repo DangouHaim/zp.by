@@ -35,7 +35,7 @@
 								<i class="fa fa-star" aria-hidden="true"></i>
 							</div>
 							<div class="service-item-price">
-								<i class="fa fa-tags" aria-hidden="true"></i> от <span>300 000</span> бр
+								<i class="fa fa-tags" aria-hidden="true"></i> от <span><?php echo get_the_excerpt(); ?></span> бр
 							</div>
 							<a href="#callback" class="button popup-with-move-anim">Заказать</a>
 						</div>
