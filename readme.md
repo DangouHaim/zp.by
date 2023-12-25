@@ -1,14 +1,55 @@
-WordPress-based template
+# WordPress-Based Template Readme
 
-use OpenServer for deployment locally
+This WordPress template is designed for easy setup, deployment, and customization. The following guide covers common setup processes, details about pages, posts, and sliders, as well as instructions for refactoring.
 
-some blog metadata is stored in functions.php fill it in after deployment
+## Common Setup and Deployment
 
-page types presented via custom field "type"
-there are few types of the page: "news", "service", "site"
-custom field "short" required for the short description of the page
+### Local Deployment with OpenServer
 
-posts used as products use post excerpt for setting up the price of the product
-use post type for the filtering configuration, any type applied to the post will be displayed on the home page as filter item
+To deploy the template locally, follow these steps:
 
-use custom field "bg" on the sliders to configure slide background
+1. Install OpenServer.
+2. Clone this repository.
+3. Configure OpenServer to use the repository as the root directory.
+4. Set up the WordPress database and configuration.
+
+## Pages
+
+### Custom Page Types
+
+Page types are determined using the custom field "type" with the following options:
+
+- "news"
+- "service"
+- "site"
+
+### Short Description
+
+Include a custom field "short" for providing a short description of each page.
+
+## Posts
+
+### Product Setup
+
+Posts are utilized as products. Use the post excerpt for setting up the price of the product.
+
+### Filtering Configuration
+
+Apply custom post types for filtering configuration. Any type assigned to the post will be displayed on the home page as a filter item.
+
+## Sliders
+
+### Slide Background Configuration
+
+Use the custom field "bg" on sliders to configure the slide background.
+
+## Refactoring Guide
+
+If you need to refactor the template:
+
+1. Examine and update the blog metadata stored in `functions.php` after deployment.
+2. Ensure that custom fields such as "type," "short," and "bg" are used consistently across pages and sliders.
+
+Feel free to customize and extend the template according to your project requirements.
+
+Happy coding!
