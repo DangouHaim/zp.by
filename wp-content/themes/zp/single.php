@@ -41,7 +41,7 @@
 						</div>
 
 						<div class="top-panel-box">
-							<h4>Другие услуги:</h4>
+							<h4>Список услуг:</h4>
 							<?php
 								$all_pages = get_pages(array(
 									'sort_order' => 'asc',
@@ -86,49 +86,49 @@
 						
 						<div class="first-col">
 							<h2>Новости компании:</h2>
-							<a href="#" class="button">Все новости</a>
+							<a href="#" class="button hidden">Все новости</a>
 						</div>
 
 					</div>
 						
-						<?php
-							$args = array(
-								'sort_order' => 'desc',
-								'sort_column' => 'post_title',
-								'hierarchical' => 0,
-								'parent' => 0,
-								'post_type' => 'page',
-								'post_status' => 'publish',
-								'meta_key' => 'type',
-								'meta_value' => 'news',
-								'number' => 3,
-							);
+					<?php
+						$args = array(
+							'sort_order' => 'desc',
+							'sort_column' => 'post_title',
+							'hierarchical' => 0,
+							'parent' => 0,
+							'post_type' => 'page',
+							'post_status' => 'publish',
+							'meta_key' => 'type',
+							'meta_value' => 'news',
+							'number' => 3,
+						);
 
-							$all_pages = get_pages($args);
+						$all_pages = get_pages($args);
 
-							if ($all_pages) :
-								echo '<ul class="menu-type-2">';
-								foreach ($all_pages as $page) :
-							?>
-								<div class="col-md-3">
-									<div class="new-item">
-										<a href="<?php echo esc_url(get_permalink($page->ID)); ?>" class="new-item-img" style="background-image: url(<?php echo get_the_post_thumbnail_url($page->ID, 'full'); ?>);">
-											<i class="fa fa-eye" aria-hidden="true"></i>
-										</a>
-										<div class="new-item-text">
-											<h4><?php echo esc_html($page->post_title); ?></h4>
-											<p><?php echo get_post_meta($page->ID, 'short', true); ?></p>
-										</div>
-										<a href="<?php echo esc_url(get_permalink($page->ID)); ?>" class="button">Подробнее</a>
-									</div>
-								</div>
-							<?php
-								endforeach;
-								echo '</ul>';
-							else :
-								echo '<p>No pages found.</p>';
-							endif;
+						if ($all_pages) :
+							echo '<ul class="menu-type-2">';
+							foreach ($all_pages as $page) :
 						?>
+							<div class="col-md-3">
+								<div class="new-item">
+									<a href="<?php echo esc_url(get_permalink($page->ID)); ?>" class="new-item-img" style="background-image: url(<?php echo get_the_post_thumbnail_url($page->ID, 'full'); ?>);">
+										<i class="fa fa-eye" aria-hidden="true"></i>
+									</a>
+									<div class="new-item-text">
+										<h4><?php echo esc_html($page->post_title); ?></h4>
+										<p><?php echo get_post_meta($page->ID, 'short', true); ?></p>
+									</div>
+									<a href="<?php echo esc_url(get_permalink($page->ID)); ?>" class="button">Подробнее</a>
+								</div>
+							</div>
+						<?php
+							endforeach;
+							echo '</ul>';
+						else :
+							echo '<p>No pages found.</p>';
+						endif;
+					?>
 
 				</div>
 			</div>		

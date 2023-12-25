@@ -24,7 +24,7 @@
 						<div class="developer text-right hidden-xs ">
 							<a href="http://vk.com/id193705724">
 								<span>Создание сайта</span>
-								<img src="img/cwebs.jpg" alt="developer">
+								<img src="<?php echo themePath(); ?>/img/cwebs.jpg" alt="developer">
 							</a>
 						</div>
 
