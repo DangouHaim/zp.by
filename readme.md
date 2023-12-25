@@ -45,9 +45,9 @@ Use the custom field "bg" on sliders to configure the slide background.
 
 ## Refactoring Guide
 
-If you need to refactor the template:
+If you need to refactor the template or change blog metadata:
 
-1. Examine and update the blog metadata stored in `functions.php` after deployment.
+1. Examine and update the blog metadata like phone, address, work time, etc. stored in `functions.php` after deployment.
 2. Ensure that custom fields such as "type," "short," and "bg" are used consistently across pages and sliders.
 
 Feel free to customize and extend the template according to your project requirements.
